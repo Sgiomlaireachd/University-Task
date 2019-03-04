@@ -66,7 +66,7 @@ def getContinuousInfo():
     i = 1
     while num + (separator * i) < keys[-1]:
         s.append(num + (separator * i))
-        print(s,i,separator*i,num)
+        # print(s,i,separator*i,num)
         i+=1
     s.append(num + (separator * i))
     # print("S:",s)
@@ -84,7 +84,8 @@ def getContinuousInfo():
                     vals[i].append(keys[j])
             if keys[j] > end: break
     # print("VALS:",vals)
-    x = [(i[0] + i[-1])/2 for i in vals]
+    s.insert(0,keys[0])
+    x = [round((s[i] + s[i+1]) / 2,3) for i in range(len(s) - 1)]
     y = [ getSum(i) for i in vals]
     return x,y,vals,s
 def printFunction():
@@ -103,7 +104,6 @@ x,y,vals,s = getContinuousInfo()
 def showIntervals():
     opening = "["
     closing = ")"
-    s.insert(0,0)
     for i in range(len(s) - 1):
         if i == len(s) - 2: closing = "]"
         print(opening + str(round(s[i],3)) + ", " + str(round(s[i+1],3)) + closing, end="  ")
@@ -252,7 +252,7 @@ def contNumericChars():
     mode(x,y)
     avg = average(x,y)
     dev = deviation(x,y,avg)
-    swing(y)
+    swing(x)
     variance_standart_variation(dev,avg)
     print("Quantiles:")
     quantiles(x,y,4)
